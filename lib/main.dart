@@ -9,6 +9,8 @@ void main() {
 }
 
 class QuizApp extends StatelessWidget {
+  const QuizApp({super.key});
+
   @override
   Widget build(Object context) {
    return  MaterialApp(

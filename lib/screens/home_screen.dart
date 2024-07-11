@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+//import 'package:flutter/widgets.dart';
 import 'package:task_4/screens/login_screen.dart';
 import 'package:task_4/utils/icons.dart';
 
@@ -21,11 +21,10 @@ class HomeScreen extends StatelessWidget {
             Image.asset(quizIcon),
             Center(
               child: Text(
-                'ITI Quiz app',
+                ' Quiz app',
                 style: TextStyle(
-                  color: Color.fromARGB(255, 248, 248, 3),
-                  fontFamily: 'elsayed',
-                  fontSize: 30,
+                  color: Color(0xffF9C86D),
+                  fontSize: 50,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -34,9 +33,10 @@ class HomeScreen extends StatelessWidget {
               height: 15,
             ),
             Center(
-              child: Text('we are creative , enjoy with app',
+              child: Text('I hope you enjoy with this app',
                   style: TextStyle(
                     color: Colors.white,
+                    fontSize: 20,
                   )),
             ),
             Spacer(),
@@ -49,13 +49,13 @@ class HomeScreen extends StatelessWidget {
                         Navigator.push<void>(
                           context,
                           MaterialPageRoute<void>(
-                            builder: (BuildContext context) =>  LoginScreen(),
+                            builder: (BuildContext context) => LoginScreen(),
                           ),
                         );
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor:
-                            Color.fromARGB(255, 0, 234, 35), // Background color
+                            Color(0xff051024), // Background color
                         foregroundColor: Colors.white, // Text color
                         shape: LinearBorder(),
                       ),
