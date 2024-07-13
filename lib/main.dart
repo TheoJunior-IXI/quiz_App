@@ -1,7 +1,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:task_4/screens/home_screen.dart';
-import 'package:task_4/screens/login_screen.dart';
 
 void main() {
   runApp( QuizApp());

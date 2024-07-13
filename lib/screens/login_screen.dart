@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:task_4/screens/category_screen.dart';
+import 'package:task_4/utils/global.dart';
 import 'package:task_4/utils/icons.dart';
 
 class LoginScreen extends StatelessWidget {
    LoginScreen({super.key});
   final _formKey = GlobalKey<FormState>();
+  final userNameController = TextEditingController();
+  final passwordController = TextEditingController();
+  void resetFields() {
+    userNameController.clear();
+    passwordController.clear();
+  }
+
   @override
   Widget build(BuildContext context) {
     // ignore: non_constant_identifier_names
@@ -18,7 +26,10 @@ class LoginScreen extends StatelessWidget {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Quiz App'),
+          title: Text('Quiz App', style: TextStyle(color: Color(0xffF9C86D)),
+
+          ),
+          
           backgroundColor: Color(0xff051024),
            iconTheme: IconThemeData(
              color: Colors.white,
@@ -69,6 +80,7 @@ class LoginScreen extends StatelessWidget {
                             padding: const EdgeInsets.only(
                                 top: 5, bottom: 10, left: 20, right: 20),
                             child: TextFormField(
+                              controller: userNameController,
                               validator:(value) {
                                 if (value!.isEmpty) {
                                   return 'username cannot be empty';
@@ -88,6 +100,8 @@ class LoginScreen extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 20),
                             child: TextFormField(
+                              controller: passwordController ,
+                              obscureText: true,
                               validator:(value) {
                                 if (value!.isEmpty) {
                                   return 'Password cannot be empty';
@@ -126,12 +140,15 @@ class LoginScreen extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.all(5.0),
                             child: ElevatedButton(
+
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
+                                  username = userNameController.text;
+                                resetFields();
                                   Navigator.of(context).push(
                                   MaterialPageRoute(builder: (context) {
                                     return CategoryScreen();
-                                  }),
+                                  }), 
                                 );
                                 }
                               },

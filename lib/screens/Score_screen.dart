@@ -2,53 +2,77 @@
 import 'package:flutter/material.dart';
 import 'package:task_4/screens/category_screen.dart';
 import 'package:task_4/screens/home_screen.dart';
+import 'package:task_4/utils/global.dart';
+//ScoreScreen
+class ScoreScreen extends StatelessWidget {
+  final int totalscore;
+  final int numberofquestion;
+  const ScoreScreen({
+    super.key,
+    required this.numberofquestion,
+    required this.totalscore,
+  });
 
-class ScoreScreen extends StatelessWidget {  @override
+  @override
   Widget build(BuildContext context) {
- 
-return Scaffold(
+    return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        padding: EdgeInsets.all(22),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Text(
-              'Congratulations Halim, you have finished the quiz and your score is :',
+            RichText(
+              textAlign: TextAlign.center,
+              text: TextSpan(
+                style: TextStyle(fontSize: 18, color: Colors.black),
+                children: [
+                  TextSpan(
+                    text: 'Hello ',
+                  ),
+                  TextSpan(
+                    text: '$username',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blue,
+                    ),
+                  ),
+                  TextSpan(
+                    text: ', you have finished the quiz, and your score is',
+                  ),
+                ],
+              ),
             ),
-            const Text(
-              '14/20',
+            Text(
+              "${totalscore}/${numberofquestion}",
               style: TextStyle(
-                  color: Colors.red, fontSize: 20, fontWeight: FontWeight.bold),
+                fontWeight: FontWeight.bold,
+                fontSize: 22,
+                color: Colors.red,
+              ),
             ),
+            SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushAndRemoveUntil(
+                Navigator.push(
                   context,
                   MaterialPageRoute<void>(
-                      builder: (BuildContext context) =>
-                           CategoryScreen()),
-                  ModalRoute.withName('/'),
+                    builder: (BuildContext context) => CategoryScreen(),
+                  ),
                 );
               },
-              child: const Text(
-                'Play Again',
-                style: TextStyle(color: Colors.black),
-              ),
+              child: Text("Play again"),
             ),
+            SizedBox(height: 10),
             OutlinedButton(
               onPressed: () {
-                Navigator.pushAndRemoveUntil(
+                Navigator.push(
                   context,
                   MaterialPageRoute<void>(
-                      builder: (BuildContext context) =>  HomeScreen()),
-                  ModalRoute.withName('/'),
+                    builder: (BuildContext context) => HomeScreen(),
+                  ),
                 );
               },
-              child: const Text(
-                'Exit',
-                style: TextStyle(color: Colors.black),
-              ),
+              child: Text("Exit"),
             ),
           ],
         ),

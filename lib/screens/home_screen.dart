@@ -18,7 +18,6 @@ class HomeScreen extends StatelessWidget {
           // crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             SizedBox(height: MediaQuery.of(context).size.height * 0.3),
-            Image.asset(quizIcon),
             Center(
               child: Text(
                 ' Quiz app',

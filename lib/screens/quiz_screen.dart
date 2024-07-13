@@ -1,23 +1,46 @@
 
 import 'package:flutter/material.dart';
-import 'package:task_4/widgets/answer_card.dart';
+import 'package:task_4/data/quiz_app_data.dart';
+import 'package:task_4/screens/Score_screen.dart';
 
-class QuizScreen extends StatefulWidget{
+class QuizScreen extends StatefulWidget{ 
+
+  const QuizScreen({super.key});
   @override
   State<QuizScreen> createState() => _QuizScreenState();
 }
 
 class _QuizScreenState extends State<QuizScreen> {
-  final List answers = const ['USA', 'Qatar', 'France', 'Egypt'];
-
+  int _questionIndex = 0;
+   int _totalScore = 0;
+     Future<bool> _onWillPop(BuildContext context) async {
+    return (await showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text('Are you sure?'),
+            content: Text('Do you want to exit the quiz?'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: Text('No'),
+              ),
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(true),
+                child: Text('Yes'),
+              ),
+            ],
+          ),
+        )) ??
+        false;
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor:Color(0xff051024),
-        title: const Text(
-          'Quition',
+        title:  Text(
+        'questions',
           style: TextStyle(color: Colors.white),
         ),
         centerTitle: true,
@@ -26,17 +49,40 @@ class _QuizScreenState extends State<QuizScreen> {
        Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Text('1st Question :', style: TextStyle(
-              color: Color(0xff092254),
-            ),),
-            const Text('What is the last country to host the world cup ?', style: TextStyle(
+            SizedBox(height: 30,),
+            Text(
+                  "Questions",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+             Text( iqQuestions[_questionIndex]['question'], style: TextStyle(
               color:  Color(0xff092254))),
-            for (int i = 0; i < answers.length; i++)
-              AnswerCard(
-                answer: answers[i],
-              ),
+               SizedBox(height: 15,),
+            for (int i = 0; i < (iqQuestions[_questionIndex]['answers']as List).length; i++)
+              ElevatedButton(
+                onPressed: (){
+                   _totalScore +=iqQuestions[_questionIndex]['answers']
+                          [i]['score'] as int;
+                    if (_questionIndex < (iqQuestions.length - 1)) {
+                        setState(() {
+                          _questionIndex++;
+                        });
+                      } else {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ScoreScreen(
+                               totalscore: _totalScore,
+                               numberofquestion: iqQuestions.length,
+                            ),
+                          ),
+                        );
+                      }      
+              },
+               child: Text(
+                iqQuestions[_questionIndex]['answers'][i]['ans']
+               ))
           ],
         ),
       ),

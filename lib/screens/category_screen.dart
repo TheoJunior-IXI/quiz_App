@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:task_4/data/quiz_app_data.dart';
+import 'package:task_4/models/category_model.dart';
 import 'package:task_4/widgets/cartegory_card.dart';
 
 class CategoryScreen extends StatelessWidget {
